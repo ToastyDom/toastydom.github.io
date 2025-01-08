@@ -76,10 +76,16 @@ education:
     summary: |
       GPA: 2.0
 
+      Thesis title: "Net2Brain: Towards a general library for deep learning models to understand the architecture of the visual cortex"
+
       Courses included:
       - Machine Learning 1
       - Introduction to Artificial Intelligence
       - Math 3: Stochastics for Computer Scientists
+
+    button:
+      text: 'Visit Net2Brain'
+      url: 'https://github.com/cvai-roig-lab/Net2Brain'
 work:
   - position: PhD Student
     company_name: Goethe University Frankfurt
