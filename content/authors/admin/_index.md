@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Domenic Bersch   
+title: Domenic Bersch
 
 # Name pronunciation (optional)
 name_pronunciation: ''
