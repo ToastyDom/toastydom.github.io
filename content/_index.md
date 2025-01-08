@@ -35,15 +35,9 @@ sections:
       title: "📚 My Research"
       subtitle: ""
       text: >-
-        I am a PhD student at the lab of Prof. Dr. Gemma Roig, focusing on
-        exploring the connection between the human brain and its cortical
-        functions through the lens of deep neural networks. My primary research
-        aim is to understand why specific deep neural networks can predict
-        processes in the human brain despite their biological implausibility,
-        delving into the realms of interpretable AI and neuroscience. I am also
-        one of the developers of the toolbox Net2Brain, which is a valuable tool
-        for exploring the relationship between artificial neural networks and
-        brain activity.
+        My current research focuses on understanding Vision Transformers among other models, particularly how they build representations that can be linked to brain function. This aligns with my broader interest in computational neuroscience, reflected, for example, in my contributions to the [Algonauts 2025 Challenge](https://algonautsproject.com/), which bridges neuroscience and machine learning. 
+        
+        Feel free to reach out if you'd like to collaborate! 😃
     design:
       columns: "1"
   - block: collection
