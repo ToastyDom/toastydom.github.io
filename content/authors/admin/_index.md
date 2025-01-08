@@ -65,21 +65,21 @@ education:
       - Computer Vision
       - Machine Learning 2
       - NLP-supported data science
-      - Theoretical Neurscience
+      - Theoretical Neuroscience
     # button:
     #   text: 'Read Thesis'
     #   url: 'https://example.com'
   - area: B.Sc Computer Science
-  institution: Goethe University Frankfurt
-  date_start: 2017-10-01
-  date_end: 2021-03-31
-  summary: |
-    GPA: 2.0
+    institution: Goethe University Frankfurt
+    date_start: 2017-10-01
+    date_end: 2021-03-31
+    summary: |
+      GPA: 2.0
 
-    Courses included:
-    - Machine Learning 1
-    - Introduction to Artificial Intelligence
-    - Math 3: Stochastics for Computer Scientists
+      Courses included:
+      - Machine Learning 1
+      - Introduction to Artificial Intelligence
+      - Math 3: Stochastics for Computer Scientists
 # work:
   - position: PhD Student
     company_name: Goethe University Frankfurt
