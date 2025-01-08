@@ -38,7 +38,7 @@ profiles:
   - icon: brands/github
     url: https://github.com/ToastyDom
   - icon: brands/linkedin
-    url: www.linkedin.com/in/domenic-bersch
+    url: https://linkedin.com/in/domenic-bersch
 #  - icon: academicons/google-scholar
 #    url: https://scholar.google.com/
   - icon: academicons/orcid
