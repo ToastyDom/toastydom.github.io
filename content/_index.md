@@ -34,26 +34,26 @@ sections:
     content:
       title: "📚 My Research"
       subtitle: ""
-      text: >-
+      text: |-
         My current research focuses on understanding Vision Transformers among other models, particularly how they build representations that can be linked to brain function. This aligns with my broader interest in computational neuroscience, reflected, for example, in my contributions to the [Algonauts 2025 Challenge](https://algonautsproject.com/), which bridges neuroscience and machine learning. 
         
         Feel free to reach out if you'd like to collaborate! 😃
     design:
       columns: "1"
+  # - block: collection
+  #   id: papers
+  #   content:
+  #     title: Featured Publications
+  #     filters:
+  #       folders:
+  #         - publication
+  #       featured_only: true
+  #   design:
+  #     view: article-grid
+  #     columns: 2
   - block: collection
-    id: papers
     content:
-      title: Featured Publications
-      filters:
-        folders:
-          - publication
-        featured_only: true
-    design:
-      view: article-grid
-      columns: 2
-  - block: collection
-    content:
-      title: Recent Publications
+      title: Publications (Selected)
       text: ""
       filters:
         folders:
