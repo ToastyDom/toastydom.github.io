@@ -2,7 +2,7 @@
 title: "The Algonauts Project 2025 Challenge: How the Human Brain Makes Sense of Multimodal Movies"
 authors:
 - Alessandro T. Gifford
-- **Domenic Bersch**
+- Domenic Bersch
 - Marie St-Laurent
 - Basile Pinsard
 - Julie Boyle
