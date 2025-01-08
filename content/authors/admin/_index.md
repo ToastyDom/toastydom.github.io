@@ -247,10 +247,9 @@ education:
 #     icon: datacamp
 #     summary: |
 #       Object-oriented programming (OOP) lets you specify relationships between functions and the objects that they can act on, helping you manage complexity in your code. This is an intermediate level course, providing an introduction to OOP, using the S3 and R6 systems. S3 is a great day-to-day R programming tool that simplifies some of the functions that you write. R6 is especially useful for industry-specific analyses, working with web APIs, and building GUIs.
-# ---
+---
 
 ## About Me
 
 I am a PhD student at the [CVAI lab](https://www.cvai.cs.uni-frankfurt.de/team.html) of Prof. Dr. Gemma Roig, focusing on exploring the connection between the human brain and its cortical functions through the lens of deep neural networks. My primary research aim is to understand why specific deep neural networks can predict processes in the human brain despite their biological implausibility, delving into the realms of interpretable AI and neuroscience.
 I am also one of the developers of the toolbox Net2Brain, which is a valuable tool for exploring the relationship between artificial neural networks and brain activity.
---- 
