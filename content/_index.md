@@ -35,11 +35,9 @@ sections:
       title: '📚 My Research'
       subtitle: ''
       text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+      I am a PhD student at the lab of Prof. Dr. Gemma Roig, focusing on exploring the connection between the human brain and its cortical functions through the lens of deep neural networks. My primary research aim is to understand why specific deep neural networks can predict processes in the human brain despite their biological implausibility, delving into the realms of interpretable AI and neuroscience.
+      I am also one of the developers of the toolbox Net2Brain, which is a valuable tool for exploring the relationship between artificial neural networks and brain activity.
 
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
-        
-        Please reach out to collaborate 😃
     design:
       columns: '1'
   - block: collection
