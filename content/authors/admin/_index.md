@@ -80,7 +80,7 @@ education:
       - Machine Learning 1
       - Introduction to Artificial Intelligence
       - Math 3: Stochastics for Computer Scientists
-# work:
+work:
   - position: PhD Student
     company_name: Goethe University Frankfurt
     company_url: ''
