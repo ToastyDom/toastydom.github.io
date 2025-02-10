@@ -70,7 +70,7 @@ sections:
         folders:
           - event
     design:
-      view: article-grid
+      view: citation
       columns: 1
   - block: collection
     id: news
