@@ -39,11 +39,11 @@ tags:
 - Multimodal Models
 - Artificial Intelligence
 
-featured: False
+featured: True
 
-links:
-- name: DOI
-  url: https://doi.org/10.48550/arXiv.2501.00504
+# links:
+# - name: DOI
+#   url: https://doi.org/10.48550/arXiv.2501.00504
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder. 
