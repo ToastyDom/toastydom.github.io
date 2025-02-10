@@ -39,11 +39,9 @@ tags:
 - Multimodal Models
 - Artificial Intelligence
 
-featured: true
+featured: False
 
 links:
-- name: arXiv
-  url: https://arxiv.org/abs/2501.00504
 - name: DOI
   url: https://doi.org/10.48550/arXiv.2501.00504
 
