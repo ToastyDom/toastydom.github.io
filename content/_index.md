@@ -54,7 +54,7 @@ sections:
   - block: collection
     id: papers
     content:
-      title: Publications (Selected)
+      title: Publications
       text: ""
       filters:
         folders:
