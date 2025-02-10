@@ -81,7 +81,7 @@ education:
       Courses included:
       - Machine Learning 1
       - Introduction to Artificial Intelligence
-      - Math 3: Stochastics for Computer Scientists
+      - Stochastics for Computer Scientists
 
     button:
       text: 'Visit Net2Brain'
