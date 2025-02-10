@@ -7,7 +7,7 @@ authors:
 - Radoslaw M. Cichy
 - Gemma Roig
 date: "2022-08-25T00:00:00Z"
-doi: "10.48550/arXiv.2208.09677"
+# doi: "10.48550/arXiv.2208.09677"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: "2022-08-25T00:00:00Z"
