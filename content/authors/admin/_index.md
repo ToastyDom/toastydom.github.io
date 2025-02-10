@@ -95,10 +95,11 @@ work:
     date_end: ''
     summary: |
       Researching neuroscience and artificial intelligence with a focus on:
+      - Artificial Intelligence
+      - Computational Neuroscience
+      - Explainability
       - Computer Vision
-      - Neuroscience
-      - PyTorch and Large Language Models (LLMs)
-      - Deep Neural Networks (DNNs)
+      - Visual Cortex
   - position: Computer Vision Software Engineer
     company_name: strazoon
     company_url: ''
