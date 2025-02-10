@@ -94,12 +94,12 @@ work:
     date_start: 2023-10-01
     date_end: ''
     summary: |
-      Researching neuroscience and artificial intelligence with a focus on:
-      - Artificial Intelligence
-      - Computational Neuroscience
-      - Explainability
-      - Computer Vision
-      - Visual Cortex
+     Research focus includes:
+     - Brain-AI comparison methods and computational neuroscience
+     - Development of Net2Brain toolbox for neural analysis
+     - Organizing Algonauts 2025 Challenge
+     - Mechanistic interpretability analysis of Vision Transformer
+     - Interpretable AI approaches in neuroscience
   - position: Computer Vision Software Engineer
     company_name: strazoon
     company_url: ''
