@@ -16,7 +16,7 @@ abstract: 'Join us for the award ceremony of the Algonauts 2025 challenge "How t
 date: '2025-08-12T13:00:00Z'
 date_end: '2025-08-13T15:00:00Z'
 all_day: false
-publishDate: '2025-07-01T00:00:00Z'
+publishDate: '2025-01-01T00:00:00Z'
 authors:
  - admin
 tags:
