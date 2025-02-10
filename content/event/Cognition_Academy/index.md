@@ -1,7 +1,7 @@
 ---
 title: Unveiling cognitive properties of brain representations + Algonauts hands-on tutorial
 
-event: Cognition Academy Cohotz 2024
+event: Cognition Academy Cohort 2024
 # event_url: https://www.visionsciences.org/
 
 location: Schloss Eckberg
