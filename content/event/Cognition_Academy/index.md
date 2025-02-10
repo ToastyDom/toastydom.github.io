@@ -10,7 +10,7 @@ address:
   country: Germany
 
 summary: "An interactive workshop on modern cognitive neuroscience methods, featuring hands-on tutorials with the Algonauts 2023 challenge and language-based fMRI analysis."
-abstract: 'This workshop explores how artificial neural networks can help us understand information processing in the brain. We will start with theoretical foundations of modern cognitive neuroscience methods, including representational similarity analysis and encoding models. Then, through two hands-on tutorials, participants will apply these concepts to real data: First, using the Algonauts 2023 challenge to predict brain responses in visual areas, and second, analyzing fMRI patterns of people reading Harry Potter to understand how our brains process language.'
+abstract: 'This workshop explores how artificial neural networks can help us understand information processing in the brain. Starting with theoretical foundations of modern cognitive neuroscience methods, including representational similarity analysis and encoding models. Then, through two hands-on tutorials, participants will apply these concepts to real data: First, using the Algonauts 2023 challenge to predict brain responses in visual areas, and second, analyzing fMRI patterns of people reading Harry Potter to understand how our brains process language.'
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
