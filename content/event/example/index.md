@@ -39,8 +39,8 @@ image:
 #    icon_pack: fab
 #    name: Follow
 #    url: https://twitter.com/georgecushen
-url_code: 'https://github.com'
-url_pdf: ''
+url_code: 'https://github.com/cvai-roig-lab/Net2Brain'
+url_pdf: 'uploads/Net2Brain_VSS_Slides.pdf'
 url_slides: 'https://slideshare.net'
 url_video: 'https://youtube.com'
 
