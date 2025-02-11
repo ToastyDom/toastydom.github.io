@@ -42,7 +42,7 @@ image:
 url_code: 'https://github.com/cvai-roig-lab/Net2Brain'
 url_pdf: 'uploads/Net2Brain_VSS_Slides.pdf'
 # url_slides: 'https://slideshare.net'
-# url_video: 'https://youtube.com'
+url_video: 'https://youtu.be/YP3pZvZLjzE'
 
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
