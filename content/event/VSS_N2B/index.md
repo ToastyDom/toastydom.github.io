@@ -31,7 +31,7 @@ tags:
 featured: false
 
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
+  caption: 'VSS2023'
   focal_point: Right
 
 #links:

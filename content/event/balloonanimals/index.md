@@ -11,7 +11,7 @@ address:
   country: Austria
 
 summary: "Revolutionizing PhD stress management through the groundbreaking method of balloon animal creation"
-abstract: 'This presentation and tutorial sesssion introduces balloon animals as the premier solution for PhD-related stress management. I demonstrate how the creation of dogs, swords, swans, and many more animals provide immediate dopamine boosts and stress relief. Inflate your joy while deflating your anxiety!'
+abstract: 'This groundbreaking presentation and tutorial sesssion introduces balloon animals as the premier solution for PhD-related stress management. I demonstrate how the creation of dogs, swords, swans, and many more animals provide immediate dopamine boosts and stress relief. Inflate your joy while deflating your anxiety!'
 date: '2024-10-03T14:00:00Z'
 date_end: '2024-10-03T15:30:00Z'
 all_day: false
@@ -31,7 +31,7 @@ tags:
 featured: false
 
 image:
-  caption: 'Photo from Session'
+  caption: 'Photo from the Talk'
   focal_point: Right
 
 #links:

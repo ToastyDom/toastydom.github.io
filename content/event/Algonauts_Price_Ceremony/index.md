@@ -32,7 +32,7 @@ tags:
 featured: false
 
 image:
-  caption: 'CCNeuro2025 [**CCN2025**](https://2025.ccneuro.org/)'
+  caption: 'CCNeuro2025'
   focal_point: Right
 
 #links:
