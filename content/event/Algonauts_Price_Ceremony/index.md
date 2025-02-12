@@ -40,7 +40,12 @@ image:
 #    icon_pack: fab
 #    name: Follow
 #    url: https://twitter.com/georgecushen
-url_code: 'https://algonautsproject.com/'
+links:
+  - icon_pack: brands
+    icon: hugo
+    name: Website
+    url: 'https://algonautsproject.com/'
+# url_code: 'https://algonautsproject.com/'
 url_video: 'https://www.youtube.com/watch?v=KvLDpsIO2eg'
 # url_slides: 'https://slideshare.net'
 # url_video: 'https://youtube.com'
