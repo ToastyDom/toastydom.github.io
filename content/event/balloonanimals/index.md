@@ -1,5 +1,5 @@
 ---
-title: 🎈 Baloonanimals - Deflating PhD Stress 🎈
+title: 🎈 Baloonanimals - Deflating PhD Stress
 
 event: PhD Kolloquium 2024 - Austria
 # event_url: https://www.visionsciences.org/
@@ -12,8 +12,8 @@ address:
 
 summary: "Revolutionizing PhD stress management through the groundbreaking method of balloon animal creation"
 abstract: 'This presentation and tutorial sesssion introduces balloon animals as the premier solution for PhD-related stress management. I demonstrate how the creation of dogs, swords, swans, and many more animals provide immediate dopamine boosts and stress relief. Inflate your joy while deflating your anxiety!'
-date: '2023-10-03T14:00:00Z'
-date_end: '2023-10-03T15:30:00Z'
+date: '2024-10-03T14:00:00Z'
+date_end: '2024-10-03T15:30:00Z'
 all_day: false
 publishDate: '2023-09-01T00:00:00Z'
 
