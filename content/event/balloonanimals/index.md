@@ -1,5 +1,5 @@
 ---
-title: 🎈 Baloonanimals - Deflating PhD Stress
+title: 🎈 Balloonanimals - Deflating PhD Stress
 
 event: PhD Kolloquium 2024 - Austria
 # event_url: https://www.visionsciences.org/
