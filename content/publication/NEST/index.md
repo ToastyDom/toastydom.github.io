@@ -35,7 +35,7 @@ tags:
 
 featured: true
 
-# links:
+links:
 # - name: Frontiers
 #   url: https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2025.1515873/abstract
 # - name: DOI
