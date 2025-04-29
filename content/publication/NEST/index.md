@@ -1,5 +1,5 @@
 ---
-title: "The Neural Encoding Simulation Toolkit (NEST)"
+title: "The Neural Encoding Simulation Toolkit (NEST), in preparation"
 authors:
 - Alessandro T. Gifford
 - Domenic Bersch
