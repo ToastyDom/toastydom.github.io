@@ -1,5 +1,5 @@
 ---
-title: (Upcoming) Algonauts 2025 Challenge Award Ceremony
+title: Algonauts 2025 Challenge Award Ceremony
 
 event: Cognitive Computational Neuroscience 2025
 event_url: https://2025.ccneuro.org/
@@ -44,9 +44,9 @@ links:
   - icon_pack: brands
     icon: hugo
     name: Website
-    url: 'https://algonautsproject.com/'
+    url: 'https://algonautsproject.com/2025/index.html'
 # url_code: 'https://algonautsproject.com/'
-# url_video: 'https://www.youtube.com/watch?v=KvLDpsIO2eg'
+url_video: 'https://www.youtube.com/watch?v=VUPYrC64bBM'
 # url_slides: 'https://slideshare.net'
 # url_video: 'https://youtube.com'
 
