@@ -1,5 +1,5 @@
 ---
-title: "The Brain Encoding Response Generator (BERG), in preparation"
+title: "The Brain Encoding Response Generator (BERG)"
 authors:
 - Alessandro T. Gifford
 - Domenic Bersch
@@ -18,7 +18,7 @@ publication: "Cognitive Computational Neuroscience (CCN)"
 publication_short: "CCN"
 abstract: |
   In silico neural responses generated from encoding models increasingly resemble in vivo responses recorded from real brains, enabling the novel research paradigm of in silico neuroscience. In silico neuroscience scales beyond what is possible with in vivo data, allowing to explore and test scientific hypotheses across vastly larger solution spaces. To catalyze this emerging research paradigm, here we introduce the Brain Encoding Response Generator (BERG), a resource consisting of multiple pre-trained encoding models of the brain and a Python package to generate accurate in silico neural responses to massive amounts of arbitrary stimuli with a few lines of code (https://github.com/gifale95/BERG). We show that BERG's encoding models accurately predict neural responses to visual stimuli, and that these in silico responses reproduce key neural signatures of visual processing in the brain. Together, this opens the doors to using in silico neural responses for scientific discovery, which we envision will lead to a more efficient and reproducible science.
-# Summary. An optional shortened abstract.
+
 summary: |
   Brain Encoding Response Generator (BERG) is a resource consisting of multiple pre-trained encoding models of the brain and an accompanying Python package to generate accurate in silico neural responses to arbitrary stimuli with just a few lines of code.
 tags:
