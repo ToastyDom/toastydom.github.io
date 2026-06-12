@@ -35,9 +35,10 @@ sections:
       title: "📚 My Research"
       subtitle: ""
       text: |-
-        My current research focuses on understanding Vision Transformers among other models, particularly how they build representations that can be linked to brain function. This aligns with my broader interest in computational neuroscience, reflected, for example, in my contributions to the [Algonauts 2025 Challenge](https://algonautsproject.com/), which bridges neuroscience and machine learning. 
+        My research sits at the intersection of artificial intelligence and computational neuroscience. I study how brains and deep neural networks represent the world, and how computational models can help us better understand brain function. My work focuses on model-brain alignment, brain encoding models, in silico neuroscience, and the interpretability of vision models such as Vision Transformers and CNNs, especially in how they represent objects, context, and semantic information. I also contribute to open tools and community resources such as [BERG](https://gifale95.github.io/BERG/), [Net2Brain](https://github.com/cvai-roig-lab/Net2Brain), and the [Algonauts Challenge](https://algonautsproject.com/).
         
         Feel free to reach out if you'd like to collaborate! 😃
+
     design:
       columns: "1"
   # - block: collection
