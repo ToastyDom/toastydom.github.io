@@ -16,7 +16,7 @@ abstract: "This keynote and tutorial introduces in silico neuroscience as an eme
 date: "2026-08-03T16:30:00-04:00"
 date_end: "2026-08-03T18:15:00-04:00"
 # all_day: false
-# publishDate: '2023-09-01T00:00:00Z'
+publishDate: '2026-06-01T00:00:00Z'
 
 authors:
   - admin
