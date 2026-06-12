@@ -20,6 +20,7 @@ publishDate: '2026-06-01T00:00:00Z'
 
 authors:
   - admin
+  - Alessandro Gifford
 
 tags: 
   - In Silico Neuroscience
