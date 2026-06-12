@@ -1,6 +1,6 @@
 ---
 title: "Presenting BERG at CCN 2026"
-date: "2026-08-03"
+date: "2026-06-03"
 summary: "We are excited to present BERG during a Keynote & Tutorial at Cognitive Computational Neuroscience 2026."
 tags:
   - BERG
