@@ -1,5 +1,5 @@
 ---
-title: "In silico neuroscience: an emerging paradigm for brain discovery
+title: "In silico neuroscience: an emerging paradigm for brain discovery"
 
 event: "Keynote & Tutorial, Cognitive Computational Neuroscience 2026"
 event_url: "https://2026.ccneuro.org/k-and-t-in-silico/"
@@ -40,11 +40,11 @@ links:
   - icon: globe 
     icon_pack: fas 
     name: Event page 
-    url: https://2026.ccneuro.org/k-and-t-in-silico/ 
+    url: "https://2026.ccneuro.org/k-and-t-in-silico/"
   - icon: github 
     icon_pack: fab 
     name: BERG 
-    code url: https://github.com/gifale95/BERG
+    url: "https://github.com/gifale95/BERG"
 
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
