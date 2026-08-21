@@ -1,0 +1,1291 @@
+/* =========================================================================
+   Domenic Bersch — personal site
+   Hand-written HTML + CSS. No JavaScript, no build step.
+
+   Contents
+     1.  Tokens (colour, type, spacing)
+     2.  Reset & base
+     3.  Layout primitives
+     4.  Header / navigation / theme toggle
+     5.  Hero
+     6.  About
+     7.  News        — timeline rows, no card chrome
+     8.  Publications — hairline text list, expandable
+     9.  Projects     — elevated cards, imagery-forward
+     10. Talks        — horizontal media objects, logo plates
+     11. Experience page
+     12. Footer
+     13. Responsive
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. TOKENS
+   Colours use light-dark(), so each value is written once: the first
+   argument is the light value, the second the dark one. Which applies is
+   decided by `color-scheme`, set on :root and overridden by the theme
+   checkbox in section 4.
+   ========================================================================= */
+
+:root {
+  color-scheme: light dark;
+
+  /* --- Surfaces: warm paper, never pure white --- */
+  --bg:          light-dark(#faf8f4, #121614);
+  --bg-soft:     light-dark(#f2efe7, #0d1110);
+  --surface:     light-dark(#ffffff, #181f1c);
+  --surface-alt: light-dark(#f7f4ed, #1e2622);
+
+  /* --- Ink --- */
+  --ink:      light-dark(#1b1f1d, #ecf1ee);
+  --ink-soft: light-dark(#454e49, #b6c0ba);
+  --ink-mute: light-dark(#6e7873, #8b968f);
+
+  /* --- Rules --- */
+  --rule:        light-dark(#e4dfd4, #262e2a);
+  --rule-strong: light-dark(#cdc6b6, #3a453f);
+
+  /* --- Emerald accent, deepened in light mode so it holds up as text --- */
+  --accent:       light-dark(#0d7a55, #34d399);
+  --accent-hover: light-dark(#0a6144, #6ee7b7);
+  --accent-wash:  light-dark(rgba(13, 122, 85, .09), rgba(52, 211, 153, .13));
+  --accent-line:  light-dark(rgba(13, 122, 85, .28), rgba(52, 211, 153, .32));
+
+  /* --- Elevation --- */
+  --shadow-sm: light-dark(0 1px 2px rgba(27, 31, 29, .05), 0 1px 2px rgba(0, 0, 0, .3));
+  --shadow-md: light-dark(0 4px 14px -4px rgba(27, 31, 29, .12), 0 4px 14px -4px rgba(0, 0, 0, .5));
+  --shadow-lg: light-dark(0 14px 34px -10px rgba(27, 31, 29, .18), 0 14px 34px -10px rgba(0, 0, 0, .6));
+
+  /* --- Type --- */
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* --- Measure --- */
+  --wrap: 74rem;
+  --prose: 40rem;
+}
+
+/* The hero is always dark, whatever the page theme. These are fixed. */
+.hero {
+  --hero-ink: #f4f8f6;
+  --hero-ink-soft: #b9c6c0;
+  --hero-accent: #4ade9f;
+  --hero-line: rgba(255, 255, 255, .16);
+  --hero-chip: rgba(255, 255, 255, .07);
+}
+
+
+/* =========================================================================
+   2. RESET & BASE
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Sticky header clearance for anchor jumps */
+html { scroll-padding-top: 5.5rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--accent); text-decoration: none; }
+
+/* Prose links get an emerald underline that thickens on hover */
+.prose a,
+.about-body a {
+  color: inherit;
+  background-image: linear-gradient(var(--accent-line), var(--accent-line));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition: background-size .2s ease, color .2s ease;
+  padding-bottom: 1px;
+}
+.prose a:hover,
+.about-body a:hover {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+img { max-width: 100%; display: block; }
+
+/* Nothing may push the page wider than the viewport. */
+h1, h2, h3, h4, p, li { overflow-wrap: break-word; }
+
+::selection { background: var(--accent); color: var(--bg); }
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0; top: -3rem;
+  z-index: 100;
+  background: var(--accent);
+  color: #fff;
+  padding: .6rem 1rem;
+  font-size: .9rem;
+  transition: top .15s ease;
+}
+.skip-link:focus { top: 0; }
+
+
+/* =========================================================================
+   3. LAYOUT PRIMITIVES
+   ========================================================================= */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section { padding-block: 5rem; }
+.section + .section { padding-top: 0; }
+
+/* Full-bleed tinted band. Used for News so it does not blur into the
+   publication list below it. */
+.section.section--band {
+  padding-block: 5rem;
+  background: var(--bg-soft);
+}
+.section--band + .section { padding-top: 5rem; }
+
+/* Section heading: small emerald eyebrow above a display-face title. */
+.section-head { margin-bottom: 2.25rem; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--display);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .7rem;
+}
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.1rem);
+  color: var(--ink);
+}
+
+.section-note {
+  margin-top: .55rem;
+  color: var(--ink-mute);
+  font-size: .95rem;
+  max-width: var(--prose);
+}
+
+
+/* =========================================================================
+   4. HEADER / NAV / THEME TOGGLE
+   ========================================================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-right: auto;
+}
+.brand-dot {
+  width: 1.6rem; height: 1.6rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule-strong);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+.nav a {
+  color: var(--ink-soft);
+  font-size: .92rem;
+  font-weight: 500;
+  padding: .4rem .7rem;
+  border-radius: 6px;
+  transition: color .18s ease, background-color .18s ease;
+}
+.nav a:hover { color: var(--ink); background: var(--bg-soft); }
+.nav a.is-active { color: var(--accent); }
+
+/* --- Theme toggle: a checkbox that inverts the OS preference ------------
+   Pure CSS. Because there is no JS, the choice is not remembered when you
+   navigate to another page — the OS preference is always the starting
+   point. Swapping this for a persistent toggle takes ~3 lines of JS.      */
+
+.theme-input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.1rem; height: 2.1rem;
+  border-radius: 7px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color .18s ease, background-color .18s ease;
+}
+.theme-toggle:hover { color: var(--ink); background: var(--bg-soft); }
+.theme-toggle svg { width: 1.05rem; height: 1.05rem; }
+
+body:has(.theme-input:focus-visible) .theme-toggle {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Invert whatever the OS asked for. */
+@media (prefers-color-scheme: light) {
+  body:has(.theme-input:checked) { color-scheme: dark; }
+}
+@media (prefers-color-scheme: dark) {
+  body:has(.theme-input:checked) { color-scheme: light; }
+}
+
+/* Show the icon for the theme you would switch *to*. */
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  .icon-sun { display: block; }
+  .icon-moon { display: none; }
+}
+@media (prefers-color-scheme: light) {
+  body:has(.theme-input:checked) .icon-sun { display: block; }
+  body:has(.theme-input:checked) .icon-moon { display: none; }
+}
+@media (prefers-color-scheme: dark) {
+  body:has(.theme-input:checked) .icon-sun { display: none; }
+  body:has(.theme-input:checked) .icon-moon { display: block; }
+}
+
+
+/* =========================================================================
+   5. HERO
+   Always dark. Layered-peaks SVG over near-black, name + tagline + interest
+   pills + action row on the left, portrait on the right.
+   ========================================================================= */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: #0b0f0d;
+  color: var(--hero-ink);
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("../media/peaks.svg");
+  background-size: cover;
+  background-position: center bottom;
+  filter: brightness(1.45) saturate(1.15);
+}
+
+/* Emerald wash + bottom vignette so text stays legible over the peaks. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(90% 70% at 12% 8%, rgba(16, 185, 129, .16), transparent 62%),
+    linear-gradient(to right, rgba(8, 12, 10, .88) 0%, rgba(8, 12, 10, .62) 48%, rgba(8, 12, 10, .18) 100%),
+    linear-gradient(to bottom, rgba(8, 12, 10, .5) 0%, transparent 38%);
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: clamp(2rem, 5vw, 4rem);
+  row-gap: 0;
+}
+
+.hero-name {
+  font-size: clamp(2.4rem, 6.5vw, 3.9rem);
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin-bottom: .9rem;
+}
+.hero-name .given { display: block; font-weight: 400; color: var(--hero-ink-soft); }
+.hero-name .family { display: block; font-weight: 700; }
+
+.hero-role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1.05rem;
+  font-size: .98rem;
+  color: var(--hero-ink);
+}
+.hero-role-badge {
+  font-family: var(--display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #04211a;
+  background: var(--hero-accent);
+  border-radius: 5px;
+  padding: .22rem .55rem;
+  white-space: nowrap;
+}
+.hero-role a {
+  color: var(--hero-ink);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, .35);
+  transition: color .18s ease, border-color .18s ease;
+}
+.hero-role a:hover { color: var(--hero-accent); border-color: var(--hero-accent); }
+
+.hero-tag {
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  line-height: 1.55;
+  color: var(--hero-ink-soft);
+  max-width: 34rem;
+  margin-bottom: 1.1rem;
+}
+.hero-tag strong { color: var(--hero-ink); font-weight: 600; }
+.hero-tag a {
+  color: var(--hero-ink);
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
+  transition: border-color .18s ease, color .18s ease;
+}
+.hero-tag a:hover { color: var(--hero-accent); border-color: var(--hero-accent); }
+
+/* --- Interest pills --- */
+.hero-interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 0 0 1.7rem;
+  padding: 0;
+  list-style: none;
+}
+.hero-interests li {
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--hero-ink-soft);
+  background: var(--hero-chip);
+  border: 1px solid var(--hero-line);
+  border-radius: 999px;
+  padding: .3rem .72rem;
+}
+
+/* --- Action row: CV button first, then icon links --- */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  max-width: 100%;
+}
+
+.btn-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--display);
+  font-size: .92rem;
+  font-weight: 600;
+  color: #04211a;
+  background: var(--hero-accent);
+  border-radius: 8px;
+  padding: .6rem 1.05rem;
+  box-shadow: 0 6px 18px -6px rgba(74, 222, 159, .6);
+  transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+.btn-cv:hover {
+  background: #6ee7b7;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(74, 222, 159, .75);
+}
+.btn-cv svg { width: 1rem; height: 1rem; }
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  min-width: 0;
+}
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  font-size: .87rem;
+  font-weight: 500;
+  color: var(--hero-ink-soft);
+  border: 1px solid var(--hero-line);
+  border-radius: 8px;
+  padding: .55rem .8rem;
+  transition: color .16s ease, border-color .16s ease, background-color .16s ease;
+}
+.hero-links a:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .38);
+  background: var(--hero-chip);
+}
+.hero-links svg { width: 1rem; height: 1rem; }
+
+/* --- Portrait --- */
+.hero-portrait {
+  position: relative;
+  width: clamp(9rem, 22vw, 13.5rem);
+  aspect-ratio: 1;
+  flex: none;
+}
+.hero-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 18px 44px -14px rgba(0, 0, 0, .8);
+}
+.hero-emoji {
+  position: absolute;
+  right: 2%;
+  bottom: 4%;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .55));
+}
+
+/* =========================================================================
+   6. ABOUT
+   ========================================================================= */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+.about-body {
+  max-width: 47rem;
+  color: var(--ink-soft);
+  font-size: 1.14rem;
+  line-height: 1.72;
+}
+.about-body p + p { margin-top: 1.15rem; }
+.about-body strong { color: var(--ink); font-weight: 600; }
+
+
+/* =========================================================================
+   7. NEWS  — dense timeline rows. Deliberately NO card chrome, so it reads
+   as a different kind of thing from Projects and Talks.
+   ========================================================================= */
+
+.news-list { max-width: 46rem; }
+
+.news-item {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding-block: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.news-list > .news-item:first-child { padding-top: 0; }
+.news-list > .news-item:last-child { border-bottom: 0; padding-bottom: 0; }
+.news-more .news-item:last-child { border-bottom: 0; }
+
+.news-date {
+  font-family: var(--display);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-top: .3rem;
+  white-space: nowrap;
+}
+
+.news-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: .35rem;
+}
+
+.news-body { font-size: .97rem; color: var(--ink-soft); }
+
+/* "Read more" link — the arrow slides out on hover. */
+.news-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .6rem;
+  font-family: var(--display);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: gap .18s ease;
+}
+.news-link:hover { gap: .6rem; }
+.news-link svg { width: .85rem; height: .85rem; }
+.news-body strong { color: var(--ink); font-weight: 600; }
+.news-body a {
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease;
+}
+.news-body a:hover { border-color: var(--accent); }
+
+/* An emerald dot marks the most recent entry. */
+.news-item.is-latest .news-date::before {
+  content: "";
+  display: inline-block;
+  width: .42rem; height: .42rem;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: .45rem;
+  vertical-align: .12em;
+}
+
+/* "Show all" — a <details> holding the older entries. */
+.news-more { border: 0; }
+.news-more > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  margin-top: 1.1rem;
+  font-family: var(--display);
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: gap .18s ease;
+}
+.news-more > summary::-webkit-details-marker { display: none; }
+.news-more > summary:hover { gap: .62rem; }
+.news-more > summary .chev {
+  width: .85rem; height: .85rem;
+  transition: transform .2s ease;
+}
+.news-more[open] > summary .chev { transform: rotate(180deg); }
+.news-more > summary .label-more { display: inline; }
+.news-more > summary .label-less { display: none; }
+.news-more[open] > summary .label-more { display: none; }
+.news-more[open] > summary .label-less { display: inline; }
+/* Older entries sit flush under the visible ones. */
+.news-more .news-item:first-child { border-top: 0; }
+
+
+/* =========================================================================
+   8. PUBLICATIONS — hairline-separated text list. No boxes, no thumbnails.
+   The abstract lives in a <details> that expands in place.
+   ========================================================================= */
+
+.pub-list { max-width: 50rem; }
+
+.pub {
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+.pub:first-child { padding-top: 0; }
+.pub:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  margin-bottom: .5rem;
+}
+
+.venue {
+  font-family: var(--display);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-wash);
+  border-radius: 4px;
+  padding: .2rem .5rem;
+}
+
+.year {
+  font-family: var(--display);
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ink-mute);
+  letter-spacing: .04em;
+}
+
+/* Award / status badges — add as many as you need.
+   An optional leading icon can go inside, e.g.
+     <span class="badge badge-highlight"><svg><use href="#i-star"></use></svg>Spotlight</span> */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .3em;
+  font-family: var(--display);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: .2rem .5rem;
+  border: 1px solid currentColor;
+}
+.badge-highlight { color: light-dark(#b45309, #fbbf24); }
+.badge-award     { color: light-dark(#9333ea, #c084fc); }
+.badge-oral      { color: light-dark(#0369a1, #60a5fa); }
+.badge-new       { color: light-dark(#0d7a55, #34d399); }
+.badge svg { width: .82em; height: .82em; flex: none; }
+
+.pub-title {
+  font-family: var(--display);
+  font-size: 1.09rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: .38rem;
+}
+.pub-title a { color: inherit; transition: color .18s ease; }
+.pub-title a:hover { color: var(--accent); }
+
+.pub-authors {
+  font-size: .91rem;
+  color: var(--ink-mute);
+  margin-bottom: .75rem;
+}
+.pub-authors .me { color: var(--ink); font-weight: 600; }
+
+/* --- Link pills: Paper, Code, Website, Dataset, … --- */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  min-width: 0;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  padding: .3rem .62rem;
+  transition: color .16s ease, border-color .16s ease, background-color .16s ease;
+}
+.pill:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+.pill svg { width: .85rem; height: .85rem; flex: none; }
+
+/* --- Expandable abstract --- */
+.disclose { margin-top: .75rem; }
+.disclose > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+  font-family: var(--display);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--ink-mute);
+  transition: color .18s ease;
+}
+.disclose > summary::-webkit-details-marker { display: none; }
+.disclose > summary:hover { color: var(--accent); }
+.disclose > summary .chev {
+  width: .8rem; height: .8rem;
+  transition: transform .2s ease;
+}
+.disclose[open] > summary .chev { transform: rotate(180deg); }
+.disclose[open] > summary { color: var(--accent); }
+
+.disclose-figure {
+  margin: 1.15rem 0 0;
+}
+/* Add `disclose-figure--portrait` for tall images so they do not dominate. */
+.disclose-figure--portrait {
+  max-width: 24rem;
+}
+.disclose-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+}
+.disclose-figure figcaption {
+  margin-top: .55rem;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* Two or more images side by side. */
+.disclose-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: .7rem;
+  margin: 1.15rem 0 0;
+}
+.disclose-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+}
+
+.disclose-body {
+  margin-top: .8rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent-line);
+  font-size: .94rem;
+  line-height: 1.68;
+  color: var(--ink-soft);
+  max-width: 46rem;
+}
+
+/* Publications sit above the pills row */
+.pub .pill-row { margin-top: .1rem; }
+
+
+/* =========================================================================
+   9. PROJECTS — the visual section. Elevated cards, 2-up.
+   ========================================================================= */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.project:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--rule-strong);
+}
+
+/* Image band: `contain` on a tinted plate, so logos and screenshots both work */
+.project-figure {
+  height: 7.5rem;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background:
+    radial-gradient(90% 120% at 50% 0%, var(--accent-wash), transparent 70%),
+    var(--surface-alt);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  flex: none;
+}
+.project-figure img {
+  max-height: 5.5rem;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* Add `is-photo` to the figure when the image is a photograph or screenshot
+   rather than a logo — it then fills the band edge to edge instead of
+   floating on the plate:  <div class="project-figure is-photo">          */
+.project-figure.is-photo {
+  position: relative;
+  padding: 0;
+  background: var(--surface-alt);
+}
+.project-figure.is-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.05rem 1.1rem 1.15rem;
+}
+
+.project-role {
+  font-family: var(--display);
+  font-size: .71rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+
+.project-title {
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: .45rem;
+}
+
+.project-desc {
+  font-size: .87rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: .95rem;
+}
+
+.project-body .pill-row { margin-top: auto; }
+.project-body .pill-row { gap: .32rem; }
+.project-body .pill {
+  background: var(--bg-soft);
+  font-size: .75rem;
+  padding: .26rem .44rem;
+  gap: .28rem;
+}
+.project-body .pill svg { width: .8rem; height: .8rem; }
+
+
+/* =========================================================================
+   10. TALKS — horizontal media objects. Flat bordered rows rather than
+   elevated cards, so they read differently from Projects.
+   ========================================================================= */
+
+.talk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.talk {
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  gap: 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.15rem;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.talk:hover { border-color: var(--rule-strong); }
+
+/* Logo plate — `contain`, because most conference images are wide logos,
+   not photographs. Cropping them would look broken. */
+.talk-figure {
+  display: grid;
+  place-items: center;
+  height: 7.5rem;
+  padding: .85rem;
+  border-radius: 8px;
+  background:
+    radial-gradient(100% 130% at 50% 0%, var(--accent-wash), transparent 72%),
+    var(--surface-alt);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.talk-figure img {
+  max-height: 5.8rem;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Same escape hatch as projects, for talks that have a real photo. */
+.talk-figure.is-photo {
+  position: relative;
+  padding: 0;
+}
+.talk-figure.is-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.talk-body { display: flex; flex-direction: column; min-width: 0; }
+
+.talk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .75rem;
+  font-size: .8rem;
+  color: var(--ink-mute);
+  margin-bottom: .45rem;
+}
+/* Category chip — same soft treatment as the publication venue chip, so the
+   two listing sections share one visual language. */
+.talk-type {
+  font-family: var(--display);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-wash);
+  border-radius: 4px;
+  padding: .2rem .5rem;
+  white-space: nowrap;
+}
+
+.talk-event {
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: .01em;
+}
+
+.talk-title {
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: .3rem;
+}
+
+.talk-where {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .85rem;
+  color: var(--ink-mute);
+  margin-bottom: .7rem;
+}
+.talk-where svg { width: .85rem; height: .85rem; flex: none; }
+
+.talk-body .pill-row { margin-top: .55rem; }
+
+/* "Upcoming" flag */
+.talk-upcoming {
+  font-family: var(--display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: light-dark(#0d7a55, #34d399);
+  background: var(--accent-wash);
+  border-radius: 4px;
+  padding: .15rem .45rem;
+}
+
+
+/* =========================================================================
+   11. EXPERIENCE PAGE
+   ========================================================================= */
+
+.page-head {
+  padding-block: clamp(3rem, 7vw, 4.5rem) 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-soft);
+}
+.page-title {
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  letter-spacing: -0.03em;
+}
+.page-lede {
+  margin-top: .85rem;
+  max-width: var(--prose);
+  color: var(--ink-soft);
+}
+
+/* Vertical rail with a node per role */
+.timeline {
+  position: relative;
+  max-width: 48rem;
+  padding-left: 1.75rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: .32rem;
+  top: .55rem;
+  bottom: .55rem;
+  width: 1px;
+  background: var(--rule);
+}
+
+.tl-item { position: relative; padding-bottom: 2.1rem; }
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -1.75rem;
+  top: .5rem;
+  width: .68rem; height: .68rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--rule-strong);
+}
+.tl-item.is-current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-wash);
+}
+
+.tl-date {
+  font-family: var(--display);
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: .3rem;
+}
+.tl-role {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.tl-org {
+  font-size: .93rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: .6rem;
+}
+.tl-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: .93rem;
+  color: var(--ink-soft);
+}
+.tl-list li { margin-bottom: .22rem; }
+.tl-note {
+  font-size: .93rem;
+  color: var(--ink-soft);
+  margin-bottom: .5rem;
+}
+.tl-gpa {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: .12rem .45rem;
+  margin-bottom: .55rem;
+}
+
+.exp-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+  gap: 3.5rem;
+  align-items: start;
+}
+
+
+/* =========================================================================
+   12. FOOTER
+   ========================================================================= */
+
+.site-footer {
+  margin-top: 5rem;
+  padding-block: 3rem 2.5rem;
+  border-top: 1px solid var(--rule);
+  background: var(--bg-soft);
+}
+
+.footer-cta {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 34rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: .93rem;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  padding: .6rem 1.1rem;
+  transition: background-color .18s ease, transform .18s ease;
+}
+.footer-mail:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.footer-mail svg { width: 1rem; height: 1rem; }
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .6rem 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  font-size: .83rem;
+  color: var(--ink-mute);
+}
+.footer-meta a { color: var(--ink-mute); border-bottom: 1px solid var(--rule-strong); }
+.footer-meta a:hover { color: var(--accent); border-color: var(--accent); }
+
+
+/* =========================================================================
+   13. RESPONSIVE
+   ========================================================================= */
+
+@media (max-width: 74rem) {
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+}
+
+@media (max-width: 60rem) {
+  .talk { grid-template-columns: 9rem minmax(0, 1fr); gap: 1.1rem; }
+  .talk-figure { height: 6rem; }
+}
+
+@media (max-width: 48rem) {
+  body { font-size: 1rem; }
+  .section { padding-block: 3.5rem; }
+
+  /* Hero stacks, portrait first */
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .hero-portrait { order: -1; width: 7.5rem; }
+  .hero-name { font-size: clamp(2.1rem, 10vw, 2.9rem); }
+
+  /* Nav drops below the brand and scrolls sideways rather than wrapping */
+  .site-header .wrap {
+    flex-wrap: wrap;
+    padding-block: .6rem;
+    row-gap: .35rem;
+  }
+  .brand { margin-right: auto; }
+  .nav {
+    order: 3;
+    width: 100%;
+    gap: .1rem;
+    overflow-x: auto;          /* fallback if it still does not fit */
+    scrollbar-width: none;
+    padding-bottom: .15rem;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    white-space: nowrap;
+    font-size: .87rem;
+    padding-inline: .42rem;
+  }
+
+  .project-grid { grid-template-columns: minmax(0, 1fr); }
+
+  /* Talks and news stack */
+  .talk { grid-template-columns: minmax(0, 1fr); }
+  .talk-figure { height: 8rem; }
+  .news-item { grid-template-columns: minmax(0, 1fr); gap: .3rem; }
+  .news-date { padding-top: 0; }
+
+  .exp-split { gap: 2.5rem; }
+}
+
+@media print {
+  .site-header, .site-footer, .hero-actions, .disclose { display: none; }
+  body { background: #fff; color: #000; }
+}

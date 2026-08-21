@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domenic Bersch</title>
+<meta name="description" content="Domenic Bersch is a PhD student at the CVAI Lab, Goethe University Frankfurt, studying how biological and artificial systems learn and represent visual information — brain encoding models, in silico neuroscience, model interpretability, and continual learning.">
+<meta name="author" content="Domenic Bersch">
+<link rel="canonical" href="https://toastydom.github.io/">
+<link rel="icon" href="media/icon.png">
+
+<!-- Open Graph / social previews -->
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Domenic Bersch">
+<meta property="og:description" content="PhD student interested in how biological and artificial systems learn and represent visual information, and how we can use each to better understand the other.">
+<meta property="og:url" content="https://toastydom.github.io/">
+<meta property="og:image" content="https://toastydom.github.io/media/avatar.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- =====================================================================
+     ICON SPRITE
+     Every icon used on the page lives here once. Reference one with:
+       <svg class="..."><use href="#i-github"></use></svg>
+     You should not need to touch this when adding content.
+     ===================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.51 2.87 8.34 6.84 9.69.5.09.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.21-3.37-1.21-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.59.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0ZM7.37 18.06H5.9V7.75h1.47v10.31ZM6.63 6.02a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8Zm11.98 8.16c-.26.62-.63 1.16-1.11 1.63-.49.47-1.06.83-1.72 1.08-.65.25-1.38.37-2.18.37h-3.2V7.75h3.42c.78 0 1.5.13 2.14.38.65.25 1.2.6 1.66 1.05.46.45.82.98 1.07 1.6.25.61.38 1.28.38 2 0 .7-.13 1.36-.38 1.98Zm-1.71-3.3a3.1 3.1 0 0 0-.72-1.09 3.2 3.2 0 0 0-1.13-.7 4.2 4.2 0 0 0-1.48-.24h-1.83v7.63h1.88c.55 0 1.04-.08 1.47-.24.43-.16.79-.39 1.09-.68.29-.29.52-.65.67-1.07.16-.42.24-.89.24-1.41 0-.83-.06-1.28-.19-1.6l.01-.6Z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-paper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m8 6-6 6 6 6"/><path d="m16 6 6 6-6 6"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="m16 11 6-4v10l-6-4Z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22V4.5Z"/><path d="M4 17.5h16"/></symbol>
+  <symbol id="i-data" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3.2"/><path d="M4 5.5v13c0 1.77 3.58 3.2 8 3.2s8-1.43 8-3.2v-13"/><path d="M4 12c0 1.77 3.58 3.2 8 3.2s8-1.43 8-3.2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.62l-5.88 3.09 1.12-6.55L2.48 9.52l6.58-.96z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+</svg>
+
+<!-- Theme toggle state. Must stay inside <body> for the CSS :has() rules. -->
+<input type="checkbox" id="theme-switch" class="theme-input">
+
+<!-- =====================================================================
+     HEADER
+     To add a nav item, copy one <a> line below.
+     ===================================================================== -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img class="brand-dot" src="media/avatar.png" alt="" width="26" height="26">
+      <span>Domenic&nbsp;Bersch</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <a class="is-active" href="#about">About Me</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="experience.html">Experience</a>
+    </nav>
+
+    <label class="theme-toggle" for="theme-switch" title="Switch appearance">
+      <span class="visually-hidden">Switch between light and dark appearance</span>
+      <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+      <svg class="icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+    </label>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- =====================================================================
+     HERO
+     ===================================================================== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1 class="hero-name">
+        <span class="given">Domenic</span>
+        <span class="family">Bersch</span>
+      </h1>
+
+      <p class="hero-role">
+        <span class="hero-role-badge">PhD Student</span>
+        <span>
+          <a href="http://www.cvai.cs.uni-frankfurt.de/" target="_blank" rel="noopener">CVAI Lab</a>,
+          Goethe University Frankfurt
+        </span>
+      </p>
+
+      <p class="hero-tag">
+        I am interested in how <strong>biological and artificial systems</strong> learn and
+        represent visual information, and how we can use each to better understand the other.
+      </p>
+
+      <!-- Research interests. Add or remove <li> items freely. -->
+      <ul class="hero-interests">
+        <li>Artificial Intelligence</li>
+        <li>Computational Neuroscience</li>
+        <li>Explainability</li>
+        <li>Computer Vision</li>
+        <li>Visual Cortex</li>
+      </ul>
+
+      <div class="hero-actions">
+        <a class="btn-cv" href="uploads/resume.pdf">
+          <svg aria-hidden="true"><use href="#i-download"></use></svg>
+          Download CV
+        </a>
+
+        <div class="hero-links">
+          <a href="mailto:bersch@em.uni-frankfurt.de">
+            <svg aria-hidden="true"><use href="#i-mail"></use></svg> Email
+          </a>
+          <a href="https://github.com/ToastyDom" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-github"></use></svg> GitHub
+          </a>
+          <a href="https://x.com/ToastyDomAI" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-x"></use></svg> X
+          </a>
+          <a href="https://linkedin.com/in/domenic-bersch" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-linkedin"></use></svg> LinkedIn
+          </a>
+          <a href="https://orcid.org/0009-0009-6235-7738" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-orcid"></use></svg> ORCID
+          </a>
+          <!-- No Google Scholar profile URL was in the old site. When you have
+               one, uncomment and fill in:
+          <a href="https://scholar.google.com/citations?user=XXXX" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-book"></use></svg> Scholar
+          </a>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-portrait">
+      <img src="media/avatar.png" alt="Portrait of Domenic Bersch" width="216" height="216">
+      <span class="hero-emoji" aria-hidden="true">😎</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     ABOUT
+     ===================================================================== -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">About</p>
+      <h2 class="section-title">Who am I?</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          I am a PhD student at the
+          <a href="https://www.cvai.cs.uni-frankfurt.de/team.html" target="_blank" rel="noopener">CVAI Lab</a>
+          of Prof. Dr. Gemma Roig at Goethe University Frankfurt. My research focuses on
+          understanding how biological and artificial systems represent and learn visual
+          information. In particular, I work with brain encoding models and in silico
+          neuroscience to study the relationship between deep neural networks and the human
+          visual system.
+        </p>
+        <p>
+          Alongside this, I am interested in model interpretability and increasingly in
+          continual learning, especially in understanding how different vision models learn
+          and represent objects, context, and semantic information.
+        </p>
+        <p>
+          As part of this work, I contribute to projects such as
+          <a href="#projects">Net2Brain</a> and <a href="#projects">BERG</a>, and I am involved
+          in organizing the <a href="#projects">Algonauts Project</a> challenge.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     NEWS
+     TO ADD AN ITEM: copy one <article class="news-item"> block to the top of
+     the list, then move "is-latest" onto it (that class draws the emerald dot,
+     so only the newest item should carry it).
+
+       <div class="news-date">    short date, e.g. Aug 2026
+       <h3 class="news-title">    the headline
+       <p>                        one or two sentences
+       <a class="news-link">      optional "read more" link
+
+     Once the list gets long, wrap the older items in:
+       <details class="news-more">
+         <summary>
+           <span class="label-more">Show earlier news</span>
+           <span class="label-less">Show fewer</span>
+           <svg class="chev"><use href="#i-chevron"></use></svg>
+         </summary>
+         ... older <article class="news-item"> blocks ...
+       </details>
+     ===================================================================== -->
+<section class="section section--band" id="news">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Recent News</p>
+      <h2 class="section-title">What I have been up to.</h2>
+    </div>
+
+    <div class="news-list">
+
+      <article class="news-item is-latest">
+        <div class="news-date">Aug 2026</div>
+        <div class="news-body">
+          <h3 class="news-title">Algonauts Project Challenge 2027</h3>
+          <p>
+            We are excited to announce a new edition of the Algonauts Project Challenge,
+            launching at the end of 2026 in collaboration with CNeuroMod. The challenge will be
+            featured at CCN 2027 in Edinburgh. Stay tuned for more information!
+          </p>
+          <a class="news-link" href="https://algonautsproject.com/2027/index.html" target="_blank" rel="noopener">
+            Challenge page <svg aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="news-item">
+        <div class="news-date">Jul 2026</div>
+        <div class="news-body">
+          <h3 class="news-title">Spotlight paper at CCN 2026</h3>
+          <p>
+            Our paper “Vision Models Capture Complementary Representations in Children That
+            Converge in Adults” was selected as a Spotlight Presentation at CCN 2026, and for a
+            contributed talk in the Computational Psychiatry &amp; Development session.
+          </p>
+          <a class="news-link" href="https://2026.ccneuro.org/contributed-talk/?id=101" target="_blank" rel="noopener">
+            Session details <svg aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="news-item">
+        <div class="news-date">Jun 2026</div>
+        <div class="news-body">
+          <h3 class="news-title">Presenting BERG at CCN 2026</h3>
+          <p>
+            We are excited to present BERG as part of a keynote and tutorial at CCN 2026,
+            showcasing how it can be used for in silico neuroscience.
+          </p>
+          <a class="news-link" href="https://2026.ccneuro.org/k-and-t-in-silico/" target="_blank" rel="noopener">
+            Keynote &amp; tutorial <svg aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="news-item">
+        <div class="news-date">Jan 2025</div>
+        <div class="news-body">
+          <h3 class="news-title">🎉 The Algonauts 2025 Challenge is now online!</h3>
+          <p>
+            The Algonauts Project 2025 challenge focuses on predicting human brain responses to
+            complex multimodal movies. Important dates and features are now live!
+          </p>
+          <a class="news-link" href="https://algonautsproject.com/2025/index.html" target="_blank" rel="noopener">
+            Challenge website <svg aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     PUBLICATIONS
+     TO ADD A PAPER: copy the whole <article class="pub"> block below and
+     edit the fields. Everything is optional except the title.
+
+       <span class="venue">      venue chip, e.g. CCN 2025 / arXiv
+       <span class="year">       year
+       <span class="badge ...">  optional. Classes available:
+                                   badge-highlight  (amber)
+                                   badge-award      (purple)
+                                   badge-oral       (blue)
+                                   badge-new        (emerald)
+                                 e.g. <span class="badge badge-award">Best Paper Candidate</span>
+       <span class="me">         wrap your own name to bold it
+       .pill-row                 one <a class="pill"> per link; icons available:
+                                   #i-paper #i-code #i-globe #i-video #i-data #i-book
+       .disclose                 the expandable abstract
+     ===================================================================== -->
+<section class="section" id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Publications</p>
+      <h2 class="section-title">Selected papers.</h2>
+      <p class="section-note">Newest first. Click a paper to read its abstract.</p>
+    </div>
+
+    <div class="pub-list">
+
+      <!-- ---------------------------------------------------------------- -->
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="venue">CCN 2026</span>
+          <span class="year">2026</span>
+          <span class="badge badge-highlight"><svg aria-hidden="true"><use href="#i-star"></use></svg>Spotlight</span>
+          <span class="badge badge-oral">Contributed Talk</span>
+        </div>
+
+        <h3 class="pub-title">
+          <a href="https://openreview.net/pdf?id=m1dF6mmYSn" target="_blank" rel="noopener">Vision Models Capture Complementary Representations in Children That Converge in Adults</a>
+        </h3>
+
+        <p class="pub-authors">
+          <span class="me">Domenic Bersch</span>, Timothy Schaumlöffel, Michela Proietti,
+          Antonia Franaszek-Traczewska, Hannah Elisabeth Zwad, Siying Xie, Marlena Baldauf,
+          Teresa Sylvester, Christina Maria Schätz, Moritz Köster, Stefanie Höhl,
+          Bert Turtleton, Radoslaw M. Cichy, Gemma Roig
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="https://openreview.net/pdf?id=m1dF6mmYSn" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+          </a>
+          <a class="pill" href="https://youtu.be/UjLXNtJN6bg?list=PLNWftEg2R4s7X_rPE8bthcaxtsCfWepsJ&amp;t=2419" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-video"></use></svg> Talk at CCN 2026
+          </a>
+        </div>
+
+        <details class="disclose">
+          <summary>Abstract <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+          <div class="disclose-body">
+            How the relationship between image-text aligned and vision-only models changes across
+            development remains unknown. To address this, we applied time-resolved representational
+            similarity analysis to EEG data from 8-year-olds, 12-year-olds, and adults. Commonality
+            analysis showed complementary structure for image-text aligned versus vision-only models
+            at 8 years, near-zero shared variance at 12 years, and greater overlap in adults, while
+            both retained unique variance at all ages. This pattern generalized across model
+            pairings, whereas vision-only model pairs showed overlapping variance at every age,
+            suggesting a double dissociation. Within-category structure appeared complementary even
+            in adults, suggesting that image-text aligned training may capture fine-grained structure
+            not recovered by vision-only training. Together, these findings suggest that image-text
+            aligned and vision-only models capture distinct aspects of visual representations that
+            become more aligned in adulthood, and that vision-only models alone may miss structure
+            relevant for developmental model-brain alignment.
+          </div>
+        </details>
+      </article>
+
+      <!-- ---------------------------------------------------------------- -->
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="venue">CCN 2025</span>
+          <span class="year">2025</span>
+        </div>
+
+        <h3 class="pub-title">
+          <a href="https://2025.ccneuro.org/abstract_pdf/Gifford_2025_Catalyzing_silico_neuroscience_toolkit_accurate_encoding.pdf" target="_blank" rel="noopener">Catalyzing in silico neuroscience with a toolkit of accurate encoding models of the brain</a>
+        </h3>
+
+        <p class="pub-authors">
+          Alessandro T. Gifford, <span class="me">Domenic Bersch</span>, Gemma Roig, Radoslaw M. Cichy
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="https://2025.ccneuro.org/abstract_pdf/Gifford_2025_Catalyzing_silico_neuroscience_toolkit_accurate_encoding.pdf" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+          </a>
+          <a class="pill" href="https://2025.ccneuro.org/poster/?id=dIxr3CPuPR" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-data"></use></svg> Poster
+          </a>
+          <a class="pill" href="https://gifale95.github.io/BERG/" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-globe"></use></svg> Website
+          </a>
+          <a class="pill" href="https://github.com/gifale95/BERG" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-code"></use></svg> Code
+          </a>
+          <a class="pill" href="https://brain-encoding-response-generator.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-book"></use></svg> Docs
+          </a>
+        </div>
+
+        <details class="disclose">
+          <summary>Abstract <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+          <div class="disclose-body">
+            In silico neural responses generated from encoding models increasingly resemble in vivo
+            responses recorded from real brains, enabling the novel research paradigm of in silico
+            neuroscience. In silico neuroscience scales beyond what is possible with in vivo data,
+            allowing to explore and test scientific hypotheses across vastly larger solution spaces.
+            To catalyze this emerging research paradigm, here we introduce the Brain Encoding Response
+            Generator (BERG), a resource consisting of multiple pre-trained encoding models of the
+            brain and a Python package to generate accurate in silico neural responses to massive
+            amounts of arbitrary stimuli with a few lines of code. We show that BERG's encoding models
+            accurately predict neural responses to visual stimuli, and that these in silico responses
+            reproduce key neural signatures of visual processing in the brain. Together, this opens the
+            doors to using in silico neural responses for scientific discovery, which we envision will
+            lead to a more efficient and reproducible science.
+          </div>
+        </details>
+      </article>
+
+      <!-- ---------------------------------------------------------------- -->
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="venue">arXiv</span>
+          <span class="year">2025</span>
+        </div>
+
+        <h3 class="pub-title">
+          <a href="https://arxiv.org/abs/2501.00504" target="_blank" rel="noopener">The Algonauts Project 2025 Challenge: How the Human Brain Makes Sense of Multimodal Movies</a>
+        </h3>
+
+        <p class="pub-authors">
+          Alessandro T. Gifford, <span class="me">Domenic Bersch</span>, Marie St-Laurent,
+          Basile Pinsard, Julie Boyle, Lune Bellec, Aude Oliva, Gemma Roig, Radoslaw M. Cichy
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="https://doi.org/10.48550/arXiv.2501.00504" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+          </a>
+          <a class="pill" href="https://algonautsproject.com/2025/index.html" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-globe"></use></svg> Challenge
+          </a>
+          <a class="pill" href="https://www.youtube.com/watch?v=KvLDpsIO2eg" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-video"></use></svg> Video
+          </a>
+        </div>
+
+        <details class="disclose">
+          <summary>Abstract <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+          <div class="disclose-body">
+            There is growing symbiosis between artificial and biological intelligence sciences: neural
+            principles inspire new intelligent machines, which are in turn used to advance our
+            theoretical understanding of the brain. To promote further collaboration between biological
+            and artificial intelligence researchers, we introduce the 2025 edition of the Algonauts
+            Project challenge: How the Human Brain Makes Sense of Multimodal Movies. In collaboration
+            with the Courtois Project on Neuronal Modelling (CNeuroMod), this edition aims to bring
+            forth a new generation of brain encoding models that are multimodal and that generalize
+            well beyond their training distribution, by training them on the largest dataset of fMRI
+            responses to movie watching available to date.
+          </div>
+        </details>
+      </article>
+
+      <!-- ---------------------------------------------------------------- -->
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="venue">Frontiers in Neuroinformatics</span>
+          <span class="year">2025</span>
+          <span class="badge badge-oral">Oral at VSS</span>
+        </div>
+
+        <h3 class="pub-title">
+          <a href="https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2025.1515873/abstract" target="_blank" rel="noopener">Net2Brain: A Toolbox to Compare Artificial Vision Models with Human Brain Responses</a>
+        </h3>
+
+        <p class="pub-authors">
+          <span class="me">Domenic Bersch</span>, Kshitij Dwivedi, Martina Vilas,
+          Radoslaw M. Cichy, Gemma Roig
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2025.1515873/abstract" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+          </a>
+          <a class="pill" href="https://github.com/cvai-roig-lab/Net2Brain" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-code"></use></svg> Code
+          </a>
+          <a class="pill" href="https://www.youtube.com/watch?v=YP3pZvZLjzE" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-video"></use></svg> Oral talk at VSS
+          </a>
+        </div>
+
+        <details class="disclose">
+          <summary>Abstract <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+          <div class="disclose-body">
+            We introduce Net2Brain, a graphical and command-line user interface toolbox for comparing
+            the representational spaces of artificial deep neural networks (DNNs) and human brain
+            recordings. Net2Brain supports activations from over 600 DNNs trained on diverse
+            vision-related tasks (e.g., semantic segmentation, depth estimation, action recognition),
+            for both image and video datasets. It computes representational dissimilarity matrices
+            (RDMs) from activations and compares them to brain recordings using representational
+            similarity analysis (RSA), weighted RSA, and searchlight search. The toolbox also allows
+            integration of new stimuli and brain recording datasets. An example demonstrates its
+            utility for testing cognitive computational neuroscience hypotheses.
+          </div>
+        </details>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =====================================================================
+     PROJECTS
+     TO ADD A PROJECT: copy one <article class="project"> block.
+     The image is `contain`-fitted on a tinted plate, so logos, icons and
+     screenshots all sit correctly without being cropped.
+     ===================================================================== -->
+<section class="section section--band" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Projects</p>
+      <h2 class="section-title">Things I work on.</h2>
+      <p class="section-note">Open tools and resources I build and maintain.</p>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project">
+        <div class="project-figure">
+          <img src="media/proj-algonauts-2027.png" alt="The Algonauts Project" loading="lazy">
+        </div>
+        <div class="project-body">
+          <p class="project-role">Lead Organizer</p>
+          <h3 class="project-title">Algonauts Project Challenge 2027</h3>
+          <p class="project-desc">
+            The next edition of the challenge, organized in collaboration with CNeuroMod. It will
+            launch at the end of 2026, with the challenge featured at CCN 2027 in Edinburgh. More
+            information will be announced over the coming months.
+          </p>
+          <div class="pill-row">
+            <a class="pill" href="https://algonautsproject.com/2027/index.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Challenge page
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-figure">
+          <img src="media/proj-berg.png" alt="BERG" loading="lazy">
+        </div>
+        <div class="project-body">
+          <p class="project-role">Lead Developer</p>
+          <h3 class="project-title">BERG</h3>
+          <p class="project-desc">
+            The Brain Encoding Response Generator is a collection of pre-trained brain encoding
+            models and a Python package for generating in silico neural responses to arbitrary
+            stimuli. It makes it easy to run large-scale in silico neuroscience experiments across
+            different datasets, subjects, brain regions, and recording modalities.
+          </p>
+          <div class="pill-row">
+            <a class="pill" href="https://gifale95.github.io/BERG/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Website
+            </a>
+            <a class="pill" href="https://github.com/gifale95/BERG" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> GitHub
+            </a>
+            <a class="pill" href="https://brain-encoding-response-generator.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-book"></use></svg> Docs
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-figure">
+          <img src="media/proj-net2brain.png" alt="Net2Brain" loading="lazy">
+        </div>
+        <div class="project-body">
+          <p class="project-role">Lead Developer</p>
+          <h3 class="project-title">Net2Brain</h3>
+          <p class="project-desc">
+            A toolbox for comparing representations from deep neural networks with human brain
+            data. It provides access to over 600 pre-trained models and supports common neural
+            comparison methods such as RSA, weighted RSA, and searchlight analysis, while also
+            allowing researchers to integrate their own models.
+          </p>
+          <div class="pill-row">
+            <a class="pill" href="https://github.com/cvai-roig-lab/Net2Brain" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> GitHub
+            </a>
+            <a class="pill" href="https://www.frontiersin.org/journals/neuroinformatics/articles/10.3389/fninf.2025.1515873/abstract" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-figure is-photo">
+          <img src="media/proj-algonauts-2025.jpg" alt="The Algonauts Project Challenge 2025" loading="lazy">
+        </div>
+        <div class="project-body">
+          <p class="project-role">Co-Organizer</p>
+          <h3 class="project-title">Algonauts Project Challenge 2025</h3>
+          <p class="project-desc">
+            The 2025 challenge focuses on multimodal brain encoding models that generalize beyond
+            their training distribution. In collaboration with CNeuroMod, it uses the largest fMRI
+            movie-watching dataset available to date and brings together the neuroscience and
+            machine learning communities.
+          </p>
+          <div class="pill-row">
+            <a class="pill" href="https://algonautsproject.com/2025/index.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Website
+            </a>
+            <a class="pill" href="https://arxiv.org/abs/2501.00504" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+            </a>
+            <a class="pill" href="https://www.youtube.com/watch?v=KvLDpsIO2eg" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Video
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     TALKS
+     TO ADD A TALK: copy one <article class="talk"> block to the top.
+
+     The meta row reads:  [type chip] [event] · [date]
+       <span class="talk-type">     the kind of talk — Keynote, Invited Speaker,
+                                    Oral Presentation, Poster, Online School …
+                                    Optional; leave it out and the row still works.
+       <span class="talk-event">    the conference or venue
+     For an upcoming talk, add this after the date:
+       <span class="talk-upcoming">Upcoming</span>
+     ===================================================================== -->
+<section class="section" id="talks">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Sharing my work</p>
+      <h2 class="section-title">Keynotes, tutorials & talks.</h2>
+      <p class="section-note">Presentations from conferences, workshops and tutorials.</p>
+    </div>
+
+    <div class="talk-list">
+
+      <article class="talk">
+        <div class="talk-figure">
+          <img src="media/talk-ccn2026.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Contributed Talk</span>
+            <span class="talk-event">CCN 2026</span>
+            <span>6 August 2026</span>
+          </div>
+          <h3 class="talk-title">Vision Models Capture Complementary Representations in Children That Converge in Adults</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Skirball Theater, New York University, New York, NY
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="https://youtu.be/UjLXNtJN6bg?list=PLNWftEg2R4s7X_rPE8bthcaxtsCfWepsJ&amp;t=2419" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Talk video
+            </a>
+            <a class="pill" href="https://openreview.net/pdf?id=m1dF6mmYSn" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+            </a>
+            <a class="pill" href="https://2026.ccneuro.org/contributed-talk/?id=101" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Session
+            </a>
+          </div>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              Selected as a Spotlight Presentation and presented in the Computational Psychiatry
+              &amp; Development contributed talk session. Using time-resolved RSA with EEG from
+              8-year-olds, 12-year-olds, and adults, we found that image-text aligned and
+              vision-only models capture complementary aspects of visual representations during
+              childhood, with their relationship becoming more similar in adults. In particular,
+              image-text aligned models showed a stronger advantage in children than in adults.
+
+              <figure class="disclose-figure disclose-figure--portrait">
+                <img src="media/Contr_Talk_1.jpeg" alt="Domenic Bersch presenting the paper at CCN 2026, Skirball Theater" loading="lazy">
+                <figcaption>Presenting at CCN 2026, Skirball Theater, New York University.</figcaption>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure">
+          <img src="media/talk-ccn2026.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Keynote &amp; Tutorial</span>
+            <span class="talk-event">CCN 2026</span>
+            <span>3 August 2026</span>
+          </div>
+          <h3 class="talk-title">In silico neuroscience: an emerging paradigm for brain discovery</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Skirball Theater, New York University, New York, NY
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="https://youtu.be/LR1RigGJoXE?list=PLNWftEg2R4s7X_rPE8bthcaxtsCfWepsJ&amp;t=2384" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Keynote video
+            </a>
+            <a class="pill" href="https://youtu.be/OzS4UI-FAcY?list=PLNWftEg2R4s7X_rPE8bthcaxtsCfWepsJ&amp;t=1" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Tutorial video
+            </a>
+            <a class="pill" href="https://colab.research.google.com/drive/1kXOzb5ivPNIk5izlqkHyCLaMz-0FqfSH?usp=sharing" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> Colab tutorial
+            </a>
+            <a class="pill" href="https://2026.ccneuro.org/k-and-t-in-silico/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Event page
+            </a>
+            <a class="pill" href="https://github.com/gifale95/BERG" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> BERG
+            </a>
+          </div>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              This keynote and tutorial introduces in silico neuroscience as an emerging paradigm
+              for brain discovery. We discuss how pretrained brain encoding models can be used to
+              generate neural responses at scale, enabling researchers to explore and test hypotheses
+              before targeted in vivo validation. In the hands-on tutorial, participants use BERG to
+              generate in silico fMRI responses, test known properties of visual cortex, and run
+              interactive experiments exploring visual selectivity across the brain. Presented with
+              Alessandro Gifford.
+
+              <figure class="disclose-figure">
+                <img src="media/KeyNote_Tut.jpeg" alt="Domenic Bersch opening the tutorial session at CCN 2026" loading="lazy">
+                <figcaption>Introducing the tutorial session at CCN 2026, New York University.</figcaption>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure">
+          <img src="media/talk-neuromatch.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Online School</span>
+            <span class="talk-event">Neuromatch Academy</span>
+            <span>July 2026</span>
+          </div>
+          <h3 class="talk-title">Algonauts 2025 Tutorial for Neuromatch Academy</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Online
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="https://neuromatch.io/" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Neuromatch
+            </a>
+            <a class="pill" href="https://algonautsproject.com/2025/index.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Algonauts 2025
+            </a>
+            <a class="pill" href="https://www.youtube.com/watch?v=VUPYrC64bBM" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Video
+            </a>
+          </div>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              We prepared a simplified version of the Algonauts 2025 Challenge for Neuromatch Academy.
+              The tutorial introduces students and early-career researchers to working with
+              neuroscientific data, multimodal movie stimuli, and brain encoding models. Our goal was
+              to make this type of data more accessible by providing an approachable Colab notebook and
+              tutorial video that guide participants through the basic ideas behind predicting brain
+              responses from visual, audio, and language features.
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure">
+          <img src="media/talk-algonauts-ceremony.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Award Ceremony Host</span>
+            <span class="talk-event">Cognitive Computational Neuroscience 2025</span>
+            <span>12–13 August 2025</span>
+          </div>
+          <h3 class="talk-title">Algonauts 2025 Challenge Award Ceremony</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Universiteit van Amsterdam, Amsterdam, Netherlands
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="https://algonautsproject.com/2025/index.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-globe"></use></svg> Website
+            </a>
+            <a class="pill" href="https://www.youtube.com/watch?v=VUPYrC64bBM" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Video
+            </a>
+          </div>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              The award ceremony of the Algonauts 2025 challenge, “How the Human Brain Makes Sense of
+              Multimodal Movies”. The ceremony featured presentations from the winners of this year's
+              challenge, highlighting their innovative methods for understanding multimodal processing
+              in the human brain, followed by an interactive Q&amp;A session with the challenge
+              participants.
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure is-photo">
+          <img src="media/talk-balloonanimals.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Talk &amp; Tutorial</span>
+            <span class="talk-event">PhD Kolloquium 2024</span>
+            <span>3 October 2024</span>
+          </div>
+          <h3 class="talk-title">🎈 Balloonanimals — Deflating PhD Stress</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Haus Bergkranz, Hirschegg, Austria
+          </p>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              This groundbreaking presentation and tutorial session introduces balloon animals as the
+              premier solution for PhD-related stress management. I demonstrate how the creation of
+              dogs, swords, swans, and many more animals provides immediate dopamine boosts and stress
+              relief. Inflate your joy while deflating your anxiety!
+
+              <figure class="disclose-figure">
+                <img src="media/talk-balloonanimals.jpg" alt="Domenic Bersch presenting on balloon animals at the PhD Kolloquium 2024" loading="lazy">
+                <figcaption>Explaining the advantages of balloon animals, Haus Bergkranz, Austria.</figcaption>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure is-photo">
+          <img src="media/talk-cognition-academy.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Invited Speaker</span>
+            <span class="talk-event">Cognition Academy Cohort 2024</span>
+            <span>23 July 2024</span>
+          </div>
+          <h3 class="talk-title">Unveiling cognitive properties of brain representations + Algonauts hands-on tutorial</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            Schloss Eckberg, Dresden, Germany
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="https://github.com/cvai-roig-lab/Net2Brain/blob/main/notebooks/Workshops/Cognition%20Academy%20Dresden%20Notebook%201.ipynb" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> Notebook 1
+            </a>
+            <a class="pill" href="https://github.com/cvai-roig-lab/Net2Brain/blob/main/notebooks/Workshops/Cognition%20Academy%20Dresden%20Notebook%202.ipynb" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> Notebook 2
+            </a>
+          </div>
+
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              This workshop explores how artificial neural networks can help us understand information
+              processing in the brain. Starting with theoretical foundations of modern cognitive
+              neuroscience methods, including representational similarity analysis and encoding models.
+              Then, through two hands-on tutorials, participants apply these concepts to real data:
+              first, using the Algonauts 2023 challenge to predict brain responses in visual areas, and
+              second, analyzing fMRI patterns of people reading Harry Potter to understand how our
+              brains process language.
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="talk">
+        <div class="talk-figure">
+          <img src="media/talk-vss.jpg" alt="" loading="lazy">
+        </div>
+        <div class="talk-body">
+          <div class="talk-meta">
+            <span class="talk-type">Oral Presentation</span>
+            <span class="talk-event">Vision Sciences Society 2023</span>
+            <span>23 May 2023</span>
+          </div>
+          <h3 class="talk-title">Net2Brain — A toolbox to compare artificial vision models with human brain responses</h3>
+          <p class="talk-where">
+            <svg aria-hidden="true"><use href="#i-pin"></use></svg>
+            TradeWinds Resort, St. Pete Beach, FL, United States
+          </p>
+
+          <div class="pill-row">
+            <a class="pill" href="uploads/Net2Brain_VSS_Slides.pdf" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-paper"></use></svg> Slides
+            </a>
+            <a class="pill" href="https://github.com/cvai-roig-lab/Net2Brain" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-code"></use></svg> Code
+            </a>
+            <a class="pill" href="https://youtu.be/YP3pZvZLjzE" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="#i-video"></use></svg> Video
+            </a>
+          </div>
+
+          <details class="disclose">
+            <summary>Details <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+            <div class="disclose-body">
+              We introduce Net2Brain, a graphical and command-line user interface toolbox for comparing
+              the representational spaces of artificial deep neural networks (DNNs) and human brain
+              recordings. Net2Brain supports activations from over 600 DNNs trained on diverse
+              vision-related tasks, for both image and video datasets. It computes representational
+              dissimilarity matrices from activations and compares them to brain recordings using RSA,
+              weighted RSA, and searchlight search. An example demonstrates its utility for testing
+              cognitive computational neuroscience hypotheses.
+
+              <figure class="disclose-figure">
+                <img src="media/Net2Brain_VSS.jpeg" alt="Domenic Bersch presenting Net2Brain at the Vision Sciences Society 2023 meeting" loading="lazy">
+                <figcaption>Presenting Net2Brain at VSS 2023, TradeWinds Resort, St. Pete Beach.</figcaption>
+              </figure>
+            </div>
+          </details>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- =====================================================================
+     FOOTER
+     ===================================================================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-cta">
+      Always happy to talk about brains, models, and where the two meet.
+    </p>
+    <a class="footer-mail" href="mailto:bersch@em.uni-frankfurt.de">
+      <svg aria-hidden="true"><use href="#i-mail"></use></svg>
+      bersch@em.uni-frankfurt.de
+    </a>
+
+    <div class="footer-meta">
+      <span>© 2026 Domenic Bersch · Frankfurt am Main</span>
+      <span>
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
