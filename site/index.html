@@ -225,6 +225,21 @@
     <div class="news-list">
 
       <article class="news-item is-latest">
+        <div class="news-date">Oct 2026</div>
+        <div class="news-body">
+          <h3 class="news-title">Spotlight poster at NeurIPS 2026</h3>
+          <p>
+            I'm excited to share that our paper “How Far Is Too Far? Object Recognition Declines Monotonically with Semantic Distance” has been accepted at NeurIPS 2026
+            as a spotlight poster! I'll be presenting it in Sydney on Wednesday, December 9,
+            5–8 PM local time, in Hall 1–4. If you're at NeurIPS, come by the poster I'd be happy to chat :)
+          </p>
+          <a class="news-link" href="https://neurips.cc/virtual/2026/loc/sydney/poster/148472" target="_blank" rel="noopener">
+            Poster session <svg aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="news-item">
         <div class="news-date">Aug 2026</div>
         <div class="news-body">
           <h3 class="news-title">Algonauts Project Challenge 2027</h3>
@@ -314,6 +329,48 @@
     </div>
 
     <div class="pub-list">
+
+      <!-- ---------------------------------------------------------------- -->
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="venue">NeurIPS 2026</span>
+          <span class="year">2026</span>
+          <span class="badge badge-highlight"><svg aria-hidden="true"><use href="#i-star"></use></svg>Spotlight</span>
+        </div>
+
+        <h3 class="pub-title">
+          <a href="https://neurips.cc/virtual/2026/loc/sydney/poster/148472" target="_blank" rel="noopener">How Far Is Too Far? Object Recognition Declines Monotonically with Semantic Distance</a>
+        </h3>
+
+        <p class="pub-authors">
+          <span class="me">Domenic Bersch</span>, Hai Van Tran, Gemma Roig
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="https://neurips.cc/virtual/2026/loc/sydney/poster/148472" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-paper"></use></svg> Paper
+          </a>
+        </div>
+
+        <details class="disclose">
+          <summary>Abstract <svg class="chev" aria-hidden="true"><use href="#i-chevron"></use></svg></summary>
+          <div class="disclose-body">
+            Vision models are sensitive to object–background context, yet it remains unclear how
+            recognition changes as the semantic distance between objects and backgrounds increases.
+            We introduce ImageNet-OOC1k, a benchmark enabling continuous control of object–background
+            relationships via a consensus semantic dissimilarity axis. This formulation reveals a
+            highly consistent monotonic decline in recognition accuracy across 35 models spanning
+            convolutional neural networks, Vision Transformers, and vision–language models. Internal
+            analyses of Vision Transformers reveal aggregation failure, where object evidence is
+            present at the patch level but not consolidated into the final prediction. Leveraging
+            this characterization, a simple spatial re-ranking strategy recovers a subset of these
+            errors and improves accuracy by up to 5.4 percentage points. These results establish
+            context sensitivity as a continuous and predictable property of modern vision systems,
+            with Vision Transformer analyses showing that failures can arise from limitations in
+            aggregating competing signals rather than from missing object representations.
+          </div>
+        </details>
+      </article>
 
       <!-- ---------------------------------------------------------------- -->
       <article class="pub">
